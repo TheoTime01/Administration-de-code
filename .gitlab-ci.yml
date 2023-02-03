@@ -1,0 +1,39 @@
+image: "python:3.7"
+
+before_script:
+  - python --version
+  - pip install -r requirements.txt
+
+stages:
+  - Static Analysis
+  - Test
+  - Lib generation
+
+flake8:
+  stage: Static Analysis
+  script:
+  - flake8 --max-line-length=150 ./main
+
+pytest:
+  stage: Test
+  script:
+  - pytest
+
+source_dist:
+  stage: Lib generation
+  script:
+  - python setup.py sdist
+  artifacts:
+    paths:
+    - ./dist/*.tar.gz
+    expire_in: 1 week
+
+bin_dist:
+  stage: Lib generation
+  script:
+  - python setup.py bdist_wheel
+  - ls ./dist/
+  artifacts:
+    paths:
+    - ./dist/*.whl
+    expire_in: 1 week
