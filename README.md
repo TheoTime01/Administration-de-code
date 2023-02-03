@@ -1,92 +1,130 @@
 # AdmCo_Partie_RenduFinal
+### PERRICHET Théotime
+
+## I. Objectif
+L'objectif de ce projet est de créer un calculateur permettant de faire la somme, la différence, le produit et la division de 2 nombres complexes  sous forme de classes et packages, tout en assurant des tests fonctionnels et en ajoutant une intégration continue du projet.
+
+## II. Organisation du projet
+Voici l'arborescence simplifiée du projet :
+    
+    .
+    ├── Package_Calculator
+    │   ├── __init__.py
+    │   ├── Calculator.py
+    │   └── __pycache__
+    │  
+    ├── Package_Test
+    │   ├── test.exo7.py
+    │   ├── __init__.py
+    │   └── __pycache__
+    │
+    ├── dist
+    │   └── Package_Calculator_Complex-0.0.1.tar.gz  
+    │   
+    ├── README.md
+    ├── requirements.txt
+    └── setup.py
+
+
+Le projet est donc composé des fichiers essentiels (README.md, .git), de fichiers permettant la bonne éxécution du projet (setup.py et requirements.txt), ainsi que deux packages:  
+* Le premier est le package Calculator, qui possède un deuxième packages à l'intérieur : Package_Calculator
+* Le deuxième est le Package_Test.  
+
+#### Package_Calculator
+C'est dans ce package qu'est définie le script Calculator.py qui définit sous forme d'une classe SimpleComplexCalculator des méthodes correspondant aux opérations élémentaires. Ce package apparaît donc comme une librairie qu'il faudra importer afin d'utiliser les méthodes pour calculer.  
+
+#### Package_Test
+C'est dans ce Package que sont géré tous les tests sur les méthodes du package Calculator, permettant de tester si les méthodes fonctionnent toujours bien malgré des modifications qu'on pourrait apporter au package Calculator. Les Tests sont gérés dans le script Calculator_test.py qui définit quatre classes (une par opérande), définissant chacune toutes les possibilités et les testants, afin de vérifier que les méthodes définies dans le package calculator fonctionnent dans tous les cas. Les tests sont effectué automatiquement à l'appel du script (soit appel direct soit appel par pytest), grâce au module unittest.  
+
+## III. Importation des packages
+Avant de pouvoir utiliser les packages ensembles, il faut importer les packages et leurs contenu, pour cela il existe trois méthodes différentes :
+
+#### 1. PYTHONPATH
+La première solution, relativement contraignante mais rapide à mettre en place et de placer le PYTHONPATH à la racine du projet, pour cela il faut ouvrir un terminal et se placer à la racine du projet et entrez la commande suivante :  
+
+    export PYTHONPATH=$PYTHONPATH:'.'
 
 
 
-## Getting started
+#### 2. SETUP.PY
+La deuxième solution est de créer un script python setup.py qui va permettre d'importer un package, pour cela il faut dans ce script indiquer le chemin d'accès à ce Package. Il faudra aussi dans certains cas définir un fichier texte requirements permettant de spécifier certaines versions de modules nécessaires à la bonne réalisation des actions.
 
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
+    python setup.py sdist
 
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
+    pytest
 
-## Add your files
+si un message d'erreur s'affiche et que le test ne s'effectue pas, alors, il faut créer un environnement virtuel et installer le fichier requirements pour pouvoir éxécuter les tests:
 
-- [ ] [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
-- [ ] [Add files using the command line](https://docs.gitlab.com/ee/gitlab-basics/add-file.html#add-a-file-using-the-command-line) or push an existing Git repository with the following command:
+    sudo apt-get install python3-venv
 
-```
-cd existing_repo
-git remote add origin https://gitlab.com/Theo_Time01/admco_partie_rendufinal.git
-git branch -M main
-git push -uf origin main
-```
+    python3 -m venv tuto_venv
 
-## Integrate with your tools
+    source ./venv/bin/activate #activation du virtual env
 
-- [ ] [Set up project integrations](https://gitlab.com/Theo_Time01/admco_partie_rendufinal/-/settings/integrations)
+    pip install -r requirements.txt
 
-## Collaborate with your team
+    python setup.py sdist
 
-- [ ] [Invite team members and collaborators](https://docs.gitlab.com/ee/user/project/members/)
-- [ ] [Create a new merge request](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
-- [ ] [Automatically close issues from merge requests](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)
-- [ ] [Enable merge request approvals](https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
-- [ ] [Automatically merge when pipeline succeeds](https://docs.gitlab.com/ee/user/project/merge_requests/merge_when_pipeline_succeeds.html)
+    pytest
 
-## Test and Deploy
+#### 3. Test Pypi
 
-Use the built-in continuous integration in GitLab.
+voir Exercice 9
 
-- [ ] [Get started with GitLab CI/CD](https://docs.gitlab.com/ee/ci/quick_start/index.html)
-- [ ] [Analyze your code for known vulnerabilities with Static Application Security Testing(SAST)](https://docs.gitlab.com/ee/user/application_security/sast/)
-- [ ] [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
-- [ ] [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/ee/user/clusters/agent/)
-- [ ] [Set up protected environments](https://docs.gitlab.com/ee/ci/environments/protected_environments.html)
+## IV.  Execution des Tests
+Maintenant que les packages sont bien importés et installés, on peut effectuer les tests, pour cela il existe deux possiblités pour éxecutés les tests, le lancement du script Calculator_test.py et pytest.  
 
-***
+#### 1. Calculator_test.py
+On peut appeler directement le script, il faut cependant pour cela avoir réglé le PYTHONPATH. Dans un terminal se placer à la racine du projet et entrer la commande :  
 
-# Editing this README
+    python3 Package_Test/Calculator_test.py
 
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!). Thank you to [makeareadme.com](https://www.makeareadme.com/) for this template.
 
-## Suggestions for a good README
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
+#### 2. Pytest
+La seconde méthode est d'entrer la commande `pytest` à la racine du projet. Cette commande va éxecuter tous les scripts python qui possède "test" dans leur nom.
 
-## Name
-Choose a self-explaining name for your project.
 
-## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
+## V. Intégration Continue
+Le projet étant enrigstrer sur Gitlab, on peut utiliser toutes les options que le site propose. L'intégration continue fait partie de ces options possibles. Cela consiste à effectuer automatiquement des actions sur le projet à chaque push du projet sur Gitlab. Dans notre cas, trois étapes sont définies à chaque push du projet sur Gitlab:  
+* Analyse de la syntaxe des codes.  
+* Lancement de la commande Pytest.  
+* Archivage disponible au téléchargement du package Calculator.  
 
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
+Pour effectuer cela, il faut créer un fichier .yml qui définit les étapes à effectuer.  
+Une fois un push effectué, on peut suivre dans l'onglet CI/CD / pipeline l'éxecution de l'intégration continue, et ainsi avoir l'information sur chacune des étapes si elles ont bien été effectuées sans difficultées.
 
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
+## VI. Autres Dépôts du projet
+Chaque aspect du projet a été traité indépendemment sous la forme de projets Gitlab indépendants. Pour plus d'information sur un aspect précis vous pouvez lire le README de l'exerice correspondant, les liens :  
+- Exercice 1: https://gitlab.com/tp1_ex1/TP1_ex1
+- Exercice 2  : https://gitlab.com/Theo_Time01/admco.git
+- Exercice 3  : https://gitlab.com/Theo_Time01/tp1_ex3 
+- Exercice 4  : https://gitlab.com/Theo_Time01/tp1_ex4  
+- Exercice 5  : https://gitlab.com/Theo_Time01/tp1_ex5  
+- Exercice 6  : https://gitlab.com/Theo_Time01/tp1_ex6  
+- Exercice 7  : https://gitlab.com/Theo_Time01/tp1_ex7  
+- Exercice 8 : https://gitlab.com/Theo_Time01/tp1_ex8  
+- Exercice 9 : https://gitlab.com/Theo_Time01/pypi  
+- Exercice 10 : https://gitlab.com/Theo_Time01/tp1_ex10  
 
-## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
+## VII. Ressources
+https://gitlab.com/fabricejumel/rendufinal_bouyssoux/-/tree/master/  
 
-## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
+PEP8 :  
+https://openclassrooms.com/fr/courses/4425111-perfectionnez-vous-en-python/4464230-assimilez-les-bonnes-pratiques-de-la-pep-8  
+https://python.doctor/page-pep-8-bonnes-pratiques-coder-python-apprendre  
+https://python.sdv.univ-paris-diderot.fr/15_bonnes_pratiques/  
+https://about.gitlab.com/handbook/business-ops/data-team/python-style-guide/  
+https://blog.impulsebyingeniance.io/outils-et-bonnes-pratiques-pour-un-code-python-de-bonne-qualite/  
+https://sphinxcontrib-napoleon.readthedocs.io/en/latest/example_google.html  
 
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
+Black : https://python.doctor/page-black-code-formatter  
+ 
+Pylint : https://realpython.com/python-code-quality/  
 
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
+Intégration continue : https://gitlab.com/js-ci-training/ci-hero-unitarytest-python  
 
-## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
+TestPypi : https://packaging.python.org/tutorials/packaging-projects/#packaging-your-project  
 
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
 
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
 
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
 
-## License
-For open source projects, say how it is licensed.
-
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
